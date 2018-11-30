@@ -1,5 +1,6 @@
 package com.example.paolo.mobapdemp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText enterEmail;
     private EditText enterPass;
     private FirebaseAuth firebaseAuth;
+    private TextView signinText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         if(firebaseAuth.getCurrentUser() != null){ //user is already logged in
             //put activity here
         }
+
+        signinText = findViewById(R.id.signinText);
         loginBtn = findViewById(R.id.loginBtn);
         enterEmail = findViewById(R.id.enterEmail);
         enterPass = findViewById(R.id.enterPass);
@@ -66,5 +71,15 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });
+
+        signinText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                LoginActivity.this.startActivity(intent);
+                LoginActivity.this.finish();
+            }
+        });
+
     }
 }
