@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser() != null){ //user is already loggedin
+        if(firebaseAuth.getCurrentUser() != null){ //user is already logged in
             //put activity here
         }
         loginBtn = findViewById(R.id.loginBtn);
@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
             }
         });
     }
