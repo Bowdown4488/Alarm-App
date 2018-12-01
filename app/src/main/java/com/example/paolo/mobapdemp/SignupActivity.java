@@ -1,6 +1,5 @@
 package com.example.paolo.mobapdemp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     private Button loginBtn;
     private EditText registerEmail;
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_signup);
 
         firebaseAuth = FirebaseAuth.getInstance();
         loginBtn = findViewById(R.id.loginBtn);
@@ -43,23 +42,23 @@ public class MainActivity extends AppCompatActivity {
                 String pass = registerPass.getText().toString().trim();
                 //If no fields in these are entered
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(MainActivity.this,"Please Enter Email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignupActivity.this,"Please Enter Email", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(pass)){
-                    Toast.makeText(MainActivity.this,"Please Enter Password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignupActivity.this,"Please Enter Password", Toast.LENGTH_LONG).show();
                     return;
                 }
                 firebaseAuth.createUserWithEmailAndPassword(email,pass)
-                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(MainActivity.this,"User added to the database" , Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignupActivity.this,"User added to the database" , Toast.LENGTH_LONG).show();
                                     registerEmail.setText("");
                                     registerPass.setText("");
                                 }else{
-                                    Toast.makeText(MainActivity.this,"Could not register", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignupActivity.this,"Could not register", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -70,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                MainActivity.this.startActivity(intent);
-                MainActivity.this.finish();
+                SignupActivity.this.startActivity(intent);
+                SignupActivity.this.finish();
             }
         });
 

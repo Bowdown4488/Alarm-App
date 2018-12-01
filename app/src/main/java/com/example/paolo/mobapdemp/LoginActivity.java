@@ -40,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
         enterEmail = findViewById(R.id.enterEmail);
         enterPass = findViewById(R.id.enterPass);
 
+        enterEmail.setText("test@gmail.com");
+        enterPass.setText("password");
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +64,10 @@ public class LoginActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     Toast.makeText(LoginActivity.this,"Logging in User: " + enterEmail.getText().toString().trim()
                                             , Toast.LENGTH_LONG).show();
-                                    enterEmail.setText("");
-                                    enterPass.setText("");
+                                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                    LoginActivity.this.startActivity(intent);
+                                    LoginActivity.this.finish();
+
                                 }else{
                                     Toast.makeText(LoginActivity.this,"Could not login invalid username/password"
                                             , Toast.LENGTH_LONG).show();
@@ -75,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         signinText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                 LoginActivity.this.startActivity(intent);
                 LoginActivity.this.finish();
             }
