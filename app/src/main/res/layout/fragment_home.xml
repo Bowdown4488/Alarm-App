@@ -31,9 +31,10 @@
         android:scaleType="center"
         android:scaleX="1.5"
         android:scaleY="1.5"
-        app:backgroundTint="@android:color/background_light"
+        app:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@android:color/transparent"
         app:srcCompat="@drawable/add" />
 
 
