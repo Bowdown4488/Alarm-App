@@ -46,6 +46,8 @@ public class HomeActivity extends AppCompatActivity {
     private Button saveBtn;
     private ListView listView;
     List<Song> songList;
+    private String email;
+    private String reference;
 
     private int length = 0;
     private boolean snooze = false;
@@ -77,13 +79,20 @@ public class HomeActivity extends AppCompatActivity {
         listView = findViewById(R.id.listViewSong);
 
         songList = new ArrayList<>();
+        reference = "";
+        //reference = "https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/Hikaru%20Nara.mp3?alt=media&token=29ca2bd8-a937-4356-837c-d015ae7f9340";
+        //reference = "https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/ReeeeeeeZero.mp3?alt=media&token=bcab51be-eec5-4ec6-be07-ac42f3f853b8";
+        //reference = "https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/Catch%20The%20Moment.mp3?alt=media&token=e90fbbef-ba35-4eba-b59e-236d3b17f221";
+        //reference = "https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/GSG.mp3?alt=media&token=21bfcc93-ac13-43f4-8c81-c85aac802e24";
+        //reference = "https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/Signal.mp3?alt=media&token=2996fec0-f473-4a10-85a9-ec390ca05e57";
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        email = user.getEmail();
 
 //        jobID = 1;
 
         if(user != null){
-            getEmail.setText("Account: " + user.getEmail());
+            getEmail.setText("Account: " + email);
             Log.d("ID",user.getUid());
             Toast.makeText(HomeActivity.this,"Unique User ID: " + user.getUid(), Toast.LENGTH_LONG).show();
         }
@@ -113,8 +122,9 @@ public class HomeActivity extends AppCompatActivity {
 
                 if(!TextUtils.isEmpty(sing)){
                     String id = databaseReference.push().getKey();
-                    Song song = new Song(id,sing,tag);
+                    Song song = new Song(id,sing,tag,email,reference);
 
+                    Log.d("reference",reference);
                     databaseReference.child(id).setValue(song);
                     Toast.makeText(HomeActivity.this,id, Toast.LENGTH_LONG).show();
                 }
@@ -159,8 +169,7 @@ public class HomeActivity extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         try{
             Log.d("Len",Integer.toString(length));
-            mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/ReeeeeeeZero.mp3?alt=media&token=bcab51be-eec5-4ec6-be07-ac42f3f853b8");
-            // mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/GSG.mp3?alt=media&token=21bfcc93-ac13-43f4-8c81-c85aac802e24");
+            mediaPlayer.setDataSource(reference);
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {

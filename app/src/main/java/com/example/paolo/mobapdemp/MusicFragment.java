@@ -34,8 +34,9 @@ public class MusicFragment extends Fragment {
 
         Bundle savedArgs = getArguments();
         if(savedArgs!=null){
-            adapter.addItem(savedArgs.getString("TITLE"));
-
+            for (int i = 0 ;i < savedArgs.getInt("SIZE");i++){
+                adapter.addItem(savedArgs.getString("TITLE"+i),savedArgs.getString("REF"+i));
+            }
         }
 
         Log.d("--- a10_fragments","MusicFragment onViewCreated");
