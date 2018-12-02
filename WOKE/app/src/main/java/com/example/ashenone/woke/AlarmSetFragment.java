@@ -12,44 +12,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
-/*
-public class AlarmSetFragment extends AppCompatActivity {
-    private TimePicker tClock;
-    private TextView tView;
-    private Button set;
-    @TargetApi(Build.VERSION_CODES.M)
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_set);
-        tClock = findViewById(R.id.timePicker1);
-        tView = findViewById(R.id.Ans);
-        set=findViewById(R.id.set);
-        //tClock
-        tClock.setCurrentHour(8);
-        tClock.setCurrentMinute(45);
-        set.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int hour = tClock.getCurrentHour();
-                int min = tClock.getCurrentMinute();
-                String time;
-                if(hour>12){
-                    hour-=12;
-                    time= Integer.toString(hour)+":"+Integer.toString(min)+" PM";
-                }else{
-                    time= Integer.toString(hour)+":"+Integer.toString(min)+" AM";
-                }
-                String days=AddDay();
-                if(!days.equals(""))
-                    time=time+" "+days;
-                tView.setText(time);
-            }
-        });
-    }
 
-    */
+
 
 public class AlarmSetFragment extends Fragment {
     private TimePicker tClock;
@@ -84,7 +48,6 @@ public class AlarmSetFragment extends Fragment {
         thurs = v.findViewById(R.id.thurs);
         fri = v.findViewById(R.id.fri);
         sat = v.findViewById(R.id.sat);
-
 
         tClock.setCurrentHour(8);
         tClock.setCurrentMinute(45);

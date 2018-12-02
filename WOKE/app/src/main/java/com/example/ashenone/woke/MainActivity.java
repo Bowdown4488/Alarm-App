@@ -22,7 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = getSupportActionBar();
 
-        loadFragment(new HomeFragment());
+        HomeFragment fragment = new HomeFragment();                                     //defaults to HomeFragment at the start
+        Bundle bundle = new Bundle();
+        bundle.putString("TIME", "ded");
+        bundle.putString("DAY", "getsuyoubi");
+        fragment.setArguments(bundle);
+        loadFragment(fragment);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,15 +36,34 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
                         toolbar.setTitle("Home");
-                        loadFragment(new HomeFragment());
+
+                        HomeFragment homeFragment = new HomeFragment();                       //put data to show here
+                        Bundle homeBundle = new Bundle();
+                        homeBundle.putString("TIME", "ded");
+                        homeBundle.putString("DAY", "getsuyoubi");
+
+                        homeFragment.setArguments(homeBundle);
+                        loadFragment(homeFragment);
                         return true;
                     case R.id.nav_music:
                         toolbar.setTitle("Music");
-                        loadFragment(new MusicFragment());
+
+                        MusicFragment musicFragment = new MusicFragment();                       //put data to show here
+                        Bundle musicBundle = new Bundle();
+                        musicBundle.putString("TITLE", "Catch the Moment");
+
+                        musicFragment.setArguments(musicBundle);
+                        loadFragment(musicFragment);
                         return true;
                     case R.id.nav_user:
                         toolbar.setTitle("User");
-                        loadFragment(new UserFragment());
+
+                        UserFragment userFragment = new UserFragment();                       //put data to show here
+                        Bundle userBundle = new Bundle();
+                        userBundle.putString("USERNAME", "Emiru");
+
+                        userFragment.setArguments(userBundle);
+                        loadFragment(userFragment);
                         return true;
                 }
                 return false;
@@ -48,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFragment(Fragment fragment) {
-        // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);

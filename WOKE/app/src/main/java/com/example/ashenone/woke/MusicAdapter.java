@@ -15,10 +15,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicHolder> {
     private ArrayList<MusicModel> musicList;
 
     public MusicAdapter(){
-        musicList = new ArrayList<MusicModel>();
-
-        musicList.add(new MusicModel("Catch the Moment"));                //test values
-        musicList.add(new MusicModel("Rising Hope"));
+        musicList = new ArrayList<>();
 
 
     }
@@ -29,8 +26,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicHolder> {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.music_recycler_row, viewGroup, false);
 
-        //(6) The view created must be given to a holder. The holder will serve as the in-between
-        //    system that interacts with the view.
+
         MusicHolder holder = new MusicHolder(view);
 
         return holder;

@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class HomeFragment extends Fragment {
 
     private RecyclerView homeRecycler;
@@ -43,14 +46,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //(4) The arguments sent in the activity can be extracted here. It is checked if it is
-        //    null initially as the first element is manually added and does not send any
-        //    arguments on the initialization of the Fragment.
-        Bundle savedAgrs = getArguments();
-        if(savedAgrs!=null){
-//            pic.setImageResource(savedAgrs.getInt("pic"));
-//            name.setText(savedAgrs.getString("name"));
-//            number.setText(savedAgrs.getString("number"));
+
+        Bundle savedArgs = getArguments();                  //loads data passed from main activity
+        if(savedArgs!=null){
+            adapter.addItem(savedArgs.getString("TIME"), savedArgs.getString("DAY"));
+
         }
 
         Log.d("--- a10_fragments","HomeFragment onViewCreated");

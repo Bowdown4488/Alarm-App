@@ -31,14 +31,11 @@ public class MusicFragment extends Fragment {
         adapter = new MusicAdapter();
         musicRecycler.setAdapter(adapter);
 
-        //(4) The arguments sent in the activity can be extracted here. It is checked if it is
-        //    null initially as the first element is manually added and does not send any
-        //    arguments on the initialization of the Fragment.
-        Bundle savedAgrs = getArguments();
-        if(savedAgrs!=null){
-//            pic.setImageResource(savedAgrs.getInt("pic"));
-//            name.setText(savedAgrs.getString("name"));
-//            number.setText(savedAgrs.getString("number"));
+
+        Bundle savedArgs = getArguments();
+        if(savedArgs!=null){
+            adapter.addItem(savedArgs.getString("TITLE"));
+
         }
 
         Log.d("--- a10_fragments","MusicFragment onViewCreated");
