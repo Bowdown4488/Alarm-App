@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = getSupportActionBar();
 
+
+        //pul db data and put inside bundle
+
         HomeFragment fragment = new HomeFragment();                                     //defaults to HomeFragment at the start
         Bundle bundle = new Bundle();
         bundle.putString("TIME", "ded");
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(homeFragment);
                         return true;
                     case R.id.nav_music:
+                        //music db
+
                         toolbar.setTitle("Music");
 
                         MusicFragment musicFragment = new MusicFragment();                       //put data to show here
