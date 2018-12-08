@@ -30,7 +30,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private String email;
-    private EditText musicSearch;
 
     private ActionBar toolbar;
 
@@ -39,13 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
     List<Song> songList;
 
+    private MusicAdapter musicAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         toolbar = getSupportActionBar();
-        musicSearch = findViewById(R.id.musicSearch);
 
         //pul db data and put inside bundle
         databaseReference = FirebaseDatabase.getInstance().getReference("Song");
@@ -85,31 +85,16 @@ public class MainActivity extends AppCompatActivity {
                         MusicFragment musicFragment = new MusicFragment();                       //put data to show here
                         Bundle musicBundle = new Bundle();
 
-//                        musicSearch.addTextChangedListener(new TextWatcher() {
-//                            @Override
-//                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                            }
-//
-//                            @Override
-//                            public void afterTextChanged(Editable s) {
-//                                filter(s.toString());
-//                            }
-//                        });
-
                         for(int i = 0;i < songList.size();i++){
                             musicBundle.putString("TITLE" + i, putTitle(i));
                             musicBundle.putString("REF" + i, putReference(i));
                         }
                         musicBundle.putInt("SIZE",songList.size());
 
+                        musicFragment.setSongList(songList);
                         musicFragment.setArguments(musicBundle);
                         loadFragment(musicFragment);
+                        Log.d("start","Filter start");
                         return true;
                     case R.id.nav_user:
                         toolbar.setTitle("User");
@@ -144,9 +129,6 @@ public class MainActivity extends AppCompatActivity {
                     songList.add(song);
                 }
                 Log.d("Song",Integer.toString(songList.size()));
-//
-//                SongList adapter = new SongList(MainActivity.this,songList);
-//                listView.setAdapter(adapter);
             }
 
             @Override
@@ -155,16 +137,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private void filter (String text){
-//        ArrayList<MusicModel> filter = new ArrayList<>();
-//        for(MusicModel song: songList){
-//            if(song.getSongTitle().toLowerCase().contains(text.toLowerCase())){
-//                filter.add(song);
-//            }
-//        }
-//        MusicAdapter.filterList(filter);
-//    }
 
     public String putTitle(int i){
         String title;

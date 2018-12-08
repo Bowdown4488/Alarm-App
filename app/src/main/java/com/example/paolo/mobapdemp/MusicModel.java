@@ -7,6 +7,10 @@ public class MusicModel {
     private String songTitle;
     private String reference;
 
+    public MusicModel() {
+
+    }
+
     public MusicModel(String title, String reference){
         this.songTitle = title;
         this.reference=reference;

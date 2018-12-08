@@ -2,6 +2,7 @@ package com.example.paolo.mobapdemp;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicHolder> {
 
-    private ArrayList<MusicModel> musicList;
+    private ArrayList<Song> musicList;
 
     public MusicAdapter(){
         musicList = new ArrayList<>();
@@ -27,56 +28,30 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicHolder> {
 
 
         MusicHolder holder = new MusicHolder(view);
+        Log.d("Adapter","create adapter");
 
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MusicHolder musicHolder, int i) {
-        musicHolder.setSongTitle(musicList.get(i).getSongTitle());
+        musicHolder.setSongTitle(musicList.get(i).getsong());
         musicHolder.setSongReference(musicList.get(i).getReference());
+        Log.d("Adapter","creating holder");
     }
 
-//
-//    @Override
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence charSequence) {
-//                String charString = charSequence.toString();
-//                if (charString.isEmpty()) {
-//                    filter = musicList;
-//                } else {
-//                    ArrayList<MusicModel> filteredList = new ArrayList<>();
-//                    for (MusicModel row : musicList) {
-//
-//                        // name match condition. this might differ depending on your requirement
-//                        // here we are looking for name or phone number match
-//                        if (row.getSongTitle().toLowerCase().contains(charString.toLowerCase())) {
-//                            filteredList.add(row);
-//                        }
-//                    }
-//
-//                    filter = filteredList;
-//                }
-//
-//                FilterResults filterResults = new FilterResults();
-//                filterResults.values = filter;
-//                return filterResults;
-//            }
+    @Override
+    public int getItemCount() { return musicList.size(); }
 
-            @Override
-            public int getItemCount() {
-                return musicList.size();
-            }
-
-            public void filterList(ArrayList<MusicModel> filter){
-                musicList = filter;
+            public void filterList(ArrayList<Song> filter){
+                musicList.clear();
+                musicList.addAll(filter);
+                Log.d("after filter","Data added");
                 notifyDataSetChanged();
             }
 
             public void addItem(String title, String ref) {
-                musicList.add(new MusicModel(title, ref));
+                musicList.add(new Song(title, ref));
                 notifyItemInserted(musicList.size() - 1);
             }
 
