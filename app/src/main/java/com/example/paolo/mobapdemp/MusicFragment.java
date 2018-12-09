@@ -87,11 +87,8 @@ public class MusicFragment extends Fragment {
             }
         }
 
-//        if(filter.get(0).getsong() != null ){  Log.d("list",filter.get(0).getsong());
-//        }
-
         Log.d("toFilter",text);
-        adapter.filterList(filter); //Fix null pointer in this line
+        adapter.filterList(filter);
     }
 
     public List<Song> setSongList (List<Song> songList){
