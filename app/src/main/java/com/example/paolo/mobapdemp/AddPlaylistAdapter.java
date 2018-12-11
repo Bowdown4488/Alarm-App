@@ -15,6 +15,7 @@ import java.util.List;
 public class AddPlaylistAdapter extends RecyclerView.Adapter<AddPlaylistHolder> {
 
     private ArrayList<Song> musicList;
+    ListStorage listStorage;
 
     public AddPlaylistAdapter(){
         musicList = new ArrayList<>();
@@ -35,7 +36,10 @@ public class AddPlaylistAdapter extends RecyclerView.Adapter<AddPlaylistHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull AddPlaylistHolder addPlaylistHolder, int i) {
+
         addPlaylistHolder.setTitle(musicList.get(i).getsong());
+        addPlaylistHolder.setSongTitle(musicList.get(i).getsong());
+        addPlaylistHolder.setSongList(listStorage.getSongList());
         addPlaylistHolder.setCheckBox(false);
 
         Log.d("Adapter","creating holder");
@@ -47,6 +51,10 @@ public class AddPlaylistAdapter extends RecyclerView.Adapter<AddPlaylistHolder> 
     public void addItem(String title) {
         musicList.add(new Song(title));
         notifyItemInserted(musicList.size() - 1);
+    }
+
+    public void setStorage (ListStorage listStorage){
+        this.listStorage = listStorage;
     }
 
 }

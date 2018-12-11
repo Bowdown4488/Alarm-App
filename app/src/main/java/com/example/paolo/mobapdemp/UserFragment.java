@@ -3,12 +3,17 @@ package com.example.paolo.mobapdemp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -16,7 +21,9 @@ public class UserFragment extends Fragment {
     private TextView  username;
     private Button Playlistbtn;
     private Button Addlistbtn;
+    String email;
     List<Song> songList;
+    ListStorage listStorage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +57,8 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+//                listStorage.lookSongs();
+
 //                MusicFragment musicFragment = new MusicFragment();                       //put data to show here
 //                Bundle musicBundle = new Bundle();
 //
@@ -66,13 +75,14 @@ public class UserFragment extends Fragment {
                 PlatlistFragment platlistFragment = new PlatlistFragment();
                 Bundle addBundle = new Bundle();
 
-                for(int i = 0;i < songList.size();i++){
+                for(int i = 0;i < listStorage.size();i++){
                     addBundle.putString("TITLE" + i, putTitle(i));
                 }
 
-                addBundle.putInt("SIZE",songList.size());
+                addBundle.putInt("SIZE",listStorage.size());
 
-                platlistFragment.setSongList(songList);
+                platlistFragment.setSongList(listStorage.getSongList());
+                platlistFragment.setStorage(listStorage);
                 platlistFragment.setArguments(addBundle);
                 loadFragment(platlistFragment,UserFragment.this);
 
@@ -113,4 +123,10 @@ public class UserFragment extends Fragment {
     public void setList (List<Song> list){
         songList = list;
     }
+
+    public void setStorage (ListStorage listStorage){
+        this.listStorage = listStorage;
+    }
+
+
 }

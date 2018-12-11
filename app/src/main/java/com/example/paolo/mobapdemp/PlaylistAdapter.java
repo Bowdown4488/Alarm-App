@@ -32,8 +32,8 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
 
     @Override
     public void onBindViewHolder(@NonNull PlaylistHolder PlaylistHolder, int i) {
-        PlaylistHolder.setName(PlaylistList.get(i).getPlaylistName());
-        PlaylistHolder.setCreatorAndCount(PlaylistList.get(i).getCreator(),PlaylistList.get(i).getSongCount());
+//        PlaylistHolder.setName(PlaylistList.get(i).getPlaylistName());
+//        PlaylistHolder.setCreatorAndCount(PlaylistList.get(i).getCreator(),PlaylistList.get(i).getSongCount());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
     }
 
     public void addItem(String name,String creator, int count){
-        PlaylistList.add(new PlaylistModel(name,creator,count));
-        notifyItemInserted(PlaylistList.size()-1);
+//        PlaylistList.add(new PlaylistModel(name,creator,count));
+//        notifyItemInserted(PlaylistList.size()-1);
     }
 }

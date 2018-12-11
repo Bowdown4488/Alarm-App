@@ -7,6 +7,7 @@ public class Song {
     String tag;
     String user;
     String reference;
+    Boolean isChecked;
 
     public Song(){
 
@@ -44,4 +45,12 @@ public class Song {
     public String getUser() { return user;}
 
     public String getReference() { return reference;}
+
+    public Boolean getChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(Boolean checked) {
+        isChecked = checked;
+    }
 }

@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private ListStorage listStorage;
 
     List<Song> songList;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         email = user.getEmail();
 
         songList = new ArrayList<>();
+        listStorage = new ListStorage(songList);
 
         HomeFragment fragment = new HomeFragment();                                     //defaults to HomeFragment at the start
         Bundle bundle = new Bundle();
@@ -102,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
                         UserFragment userFragment = new UserFragment();                       //put data to show here
                         Bundle userBundle = new Bundle();
                         userBundle.putString("USERNAME", email);
-                        userFragment.setList(songList);
+                        userFragment.setList(listStorage.getSongList());
+                        userFragment.setStorage(listStorage);
+//                        listStorage.lookSongs();
 
                         userFragment.setArguments(userBundle);
                         loadFragment(userFragment);
@@ -126,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
                 //}
                 for(DataSnapshot songSnapshot: dataSnapshot.getChildren()){
                     Song song = songSnapshot.getValue(Song.class);
-                    Log.d("Song",song.getsong());
+                    song.setChecked(false);
+                    Log.d("Song",song.getsong() + " is checked " + song.getChecked());
                     songList.add(song);
                 }
                 Log.d("Song",Integer.toString(songList.size()));
@@ -158,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-
+    public String getEmail (){
+        return email;
+    }
 
 }

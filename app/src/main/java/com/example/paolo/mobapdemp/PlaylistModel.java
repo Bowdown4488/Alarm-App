@@ -1,40 +1,53 @@
 package com.example.paolo.mobapdemp;
 
+import java.util.List;
+
 public class PlaylistModel {
-    private String name;
-    private String creator;
-    private int songCount;
+    String playlistID;
+    String playlistTitle;
+    String creator;
+    List<String> songID;
 
-    public PlaylistModel(String name,String creator, int song){
+    public PlaylistModel(){
 
-        this.name=name;
+    }
+
+    public PlaylistModel(String playlistID,String playlistTitle,String creator,  List<String> songID){
+        this.playlistID=playlistID;
+        this.playlistTitle = playlistTitle;
         this.creator=creator;
-        songCount=song;
+        this.songID = songID;
     }
 
-    public String getPlaylistName(){
-        return name;
+    public String getPlaylistID() {
+        return playlistID;
     }
 
-    public void setPlaylistName(String title){
-        name = title;
+    public void setPlaylistID(String playlistID) {
+        this.playlistID = playlistID;
     }
 
-    public String getCreator(){
+    public String getPlaylistTitle() {
+        return playlistTitle;
+    }
+
+    public void setPlaylistTitle(String playlistTitle) {
+        this.playlistTitle = playlistTitle;
+    }
+
+    public String getCreator() {
         return creator;
     }
 
-    public void setCreator(String title){
-        creator = title;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
-    public int getSongCount(){
-        return songCount;
+    public List<String> getSongID() {
+        return songID;
     }
 
-    public void setSongCount(int song){
-        songCount=song;
+    public void setSongID(List<String> songID) {
+        this.songID = songID;
     }
-
-
 }
