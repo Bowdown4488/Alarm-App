@@ -25,8 +25,8 @@ public class PlaylistHolder extends RecyclerView.ViewHolder {
         nameTxt.setText(text);
     }
 
-    public void setCreatorAndCount (String text,int count){
-        creatorNcountTxt.setText("By "+text+" ~ "+Integer.toString(count)+" songs");
+    public void setCreator (String text,int count){
+        creatorNcountTxt.setText("By "+text+" ~ "+ count +" songs");
     }
 
 

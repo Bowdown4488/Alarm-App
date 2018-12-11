@@ -7,16 +7,24 @@ public class PlaylistModel {
     String playlistTitle;
     String creator;
     List<String> songID;
+    int count;
 
     public PlaylistModel(){
 
     }
 
-    public PlaylistModel(String playlistID,String playlistTitle,String creator,  List<String> songID){
+    public PlaylistModel(String playlistID,String playlistTitle,String creator,  List<String> songID, int count){
         this.playlistID=playlistID;
         this.playlistTitle = playlistTitle;
         this.creator=creator;
         this.songID = songID;
+        this.count = count;
+    }
+
+    public PlaylistModel (String playlistTitle, String creator, int count){
+        this.playlistTitle = playlistTitle;
+        this.creator=creator;
+        this.count = count;
     }
 
     public String getPlaylistID() {
@@ -49,5 +57,13 @@ public class PlaylistModel {
 
     public void setSongID(List<String> songID) {
         this.songID = songID;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

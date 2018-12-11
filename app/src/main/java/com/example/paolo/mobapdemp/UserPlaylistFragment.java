@@ -34,10 +34,10 @@ public class UserPlaylistFragment extends Fragment {
 
         Bundle savedArgs = getArguments();                  //loads data passed from main activity
         if(savedArgs!=null){
-            adapter.addItem(savedArgs.getString("NAME"), savedArgs.getString("CREATOR"),savedArgs.getInt("SONG"));
-
+            for (int i = 0 ;i < savedArgs.getInt("Size");i++){
+                adapter.addItem(savedArgs.getString("NAME"+i), savedArgs.getString("CREATOR"+i),savedArgs.getInt("COUNT"+i));
+            }
         }
-
     }
 
 }
