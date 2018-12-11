@@ -25,6 +25,10 @@ public class Song {
         this.reference = reference;
     }
 
+    public Song (String song){
+        this.song = song;
+    }
+
     public String getartistId() {
         return artistId;
     }

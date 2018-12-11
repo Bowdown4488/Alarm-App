@@ -50,18 +50,32 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                MusicFragment musicFragment = new MusicFragment();                       //put data to show here
-                Bundle musicBundle = new Bundle();
+//                MusicFragment musicFragment = new MusicFragment();                       //put data to show here
+//                Bundle musicBundle = new Bundle();
+//
+//                for(int i = 0;i < songList.size();i++){
+//                    musicBundle.putString("TITLE" + i, putTitle(i));
+//                    musicBundle.putString("REF" + i, putReference(i));
+//                }
+//                musicBundle.putInt("SIZE",songList.size());
+//
+//                musicFragment.setSongList(songList);
+//                musicFragment.setArguments(musicBundle);
+//                loadFragment(musicFragment, UserFragment.this);
+
+                PlatlistFragment platlistFragment = new PlatlistFragment();
+                Bundle addBundle = new Bundle();
 
                 for(int i = 0;i < songList.size();i++){
-                    musicBundle.putString("TITLE" + i, putTitle(i));
-                    musicBundle.putString("REF" + i, putReference(i));
+                    addBundle.putString("TITLE" + i, putTitle(i));
                 }
-                musicBundle.putInt("SIZE",songList.size());
 
-                musicFragment.setSongList(songList);
-                musicFragment.setArguments(musicBundle);
-                loadFragment(musicFragment, UserFragment.this);
+                addBundle.putInt("SIZE",songList.size());
+
+                platlistFragment.setSongList(songList);
+                platlistFragment.setArguments(addBundle);
+                loadFragment(platlistFragment,UserFragment.this);
+
                 Log.d("start","Playlist start");
             }
         });
