@@ -44,7 +44,11 @@ public class MusicHolder extends RecyclerView.ViewHolder {
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                mediaPlayer.reset();
+//                mediaPlayer.stop();
+//                mediaPlayer.release();
+//                length = 0;
+//                isPlaying = false;
             }
         });
     }
@@ -88,10 +92,6 @@ public class MusicHolder extends RecyclerView.ViewHolder {
         Log.d("Play","stopping song" + reference);
         if (mediaPlayer.isPlaying()) {
             try {
-//                mediaPlayer.reset();
-//                mediaPlayer.stop();
-//                mediaPlayer.release();
-//                snooze = true;
                 mediaPlayer.pause();
                 length = mediaPlayer.getCurrentPosition();
                 int temp = length;

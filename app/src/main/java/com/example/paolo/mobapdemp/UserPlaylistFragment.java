@@ -32,17 +32,11 @@ public class UserPlaylistFragment extends Fragment {
         adapter = new PlaylistAdapter();
         UPRecycler.setAdapter(adapter);
 
-
-
-
         Bundle savedArgs = getArguments();                  //loads data passed from main activity
         if(savedArgs!=null){
             adapter.addItem(savedArgs.getString("NAME"), savedArgs.getString("CREATOR"),savedArgs.getInt("SONG"));
 
         }
-        /*
-        Log.d("--- a10_fragments","HomeFragment onViewCreated");
-        */
 
     }
 

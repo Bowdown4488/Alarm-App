@@ -10,9 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class UserFragment extends Fragment {
     private TextView  username;
     private Button Playlistbtn;
+    private Button Addlistbtn;
+    List<Song> songList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,9 +30,8 @@ public class UserFragment extends Fragment {
         username = view.findViewById(R.id.userName);
 //        number = view.findViewById(R.id.contact_number);
         Playlistbtn= view.findViewById(R.id.viewPlaybtn);
-        //(4) The arguments sent in the activity can be extracted here. It is checked if it is
-        //    null initially as the first element is manually added and does not send any
-        //    arguments on the initialization of the Fragment.
+        Addlistbtn = view.findViewById(R.id.addPlaybtn);
+
         Playlistbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +45,27 @@ public class UserFragment extends Fragment {
                 loadFragment(UPFragment, UserFragment.this);
             }
         });
+
+        Addlistbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                MusicFragment musicFragment = new MusicFragment();                       //put data to show here
+                Bundle musicBundle = new Bundle();
+
+                for(int i = 0;i < songList.size();i++){
+                    musicBundle.putString("TITLE" + i, putTitle(i));
+                    musicBundle.putString("REF" + i, putReference(i));
+                }
+                musicBundle.putInt("SIZE",songList.size());
+
+                musicFragment.setSongList(songList);
+                musicFragment.setArguments(musicBundle);
+                loadFragment(musicFragment, UserFragment.this);
+                Log.d("start","Playlist start");
+            }
+        });
+
         Bundle savedAgrs = getArguments();
         if(savedAgrs!=null){
 
@@ -57,5 +82,21 @@ public class UserFragment extends Fragment {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public String putTitle(int i){
+        String title;
+        title = songList.get(i).getsong();
+        return title;
+    }
+
+    public String putReference(int i){
+        String ref;
+        ref = songList.get(i).getReference();
+        return ref;
+    }
+
+    public void setList (List<Song> list){
+        songList = list;
     }
 }

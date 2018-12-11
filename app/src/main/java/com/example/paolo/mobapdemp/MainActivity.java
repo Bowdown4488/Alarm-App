@@ -101,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
                         UserFragment userFragment = new UserFragment();                       //put data to show here
                         Bundle userBundle = new Bundle();
-                        userBundle.putString("USERNAME", "Emiru");
+                        userBundle.putString("USERNAME", email);
+                        userFragment.setList(songList);
 
                         userFragment.setArguments(userBundle);
                         loadFragment(userFragment);
@@ -156,5 +157,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+
 
 }
