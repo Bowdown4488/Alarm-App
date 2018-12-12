@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
                 swapFragment(fragment);
             }
         });
-        
+
         Bundle savedArgs = getArguments();                  //loads data passed from main activity
         if(savedArgs!=null){
             adapter.addItem(savedArgs.getInt("HOUR"), savedArgs.getInt("MINUTE"), savedArgs.getInt("DAY"));
@@ -98,15 +98,15 @@ public class HomeFragment extends Fragment {
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(ALARM_UPDATE_TAG);
-
-        Intent i = new Intent(getActivity(),ActivityReceiver.class);
-        Bundle b = new Bundle();
-        b.putInt("Size", size);
-        for(int x = 0;x<size;x++){
-            b.putString("LIST"+i, reference.get(x));
-        }
-
-        i.putExtras(b);
+//
+//        Intent i = new Intent(getActivity(),ActivityReceiver.class);
+//        Bundle b = new Bundle();
+//        b.putInt("Size", size);
+//        for(int x = 0;x<size;x++){
+//            b.putString("LIST"+i, reference.get(x));
+//        }
+//
+//        i.putExtras(b);
 
         getActivity().registerReceiver(receiver, filter);
         Log.d("--- a10_fragments","HomeFragment onViewCreated");
