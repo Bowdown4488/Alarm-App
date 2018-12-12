@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,19 +36,16 @@ public class PlaylistHolder extends RecyclerView.ViewHolder {
     private String title;
     String email;
 
-    public PlaylistHolder(@NonNull View itemView) {
+    public PlaylistHolder(@NonNull final View itemView) {
         super(itemView);
 
         nameTxt = itemView.findViewById(R.id.pnameTxt);
         creatorNcountTxt=itemView.findViewById(R.id.creatorNcountTxt);
         layout=itemView.findViewById(R.id.layout);
 
-        //songList = new ArrayList<>();
-
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //initSongs();
 
                 int k = 0;
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
@@ -83,13 +81,14 @@ public class PlaylistHolder extends RecyclerView.ViewHolder {
                     }
                 }
 
+                Toast.makeText(v.getContext(),"Loading playlist: " + playList.get(position).getPlaylistTitle(),Toast.LENGTH_LONG).show();
+
 
                 musicBundle.putInt("SIZE",k);
 
                 musicFragment.setSongList(songList);
                 musicFragment.setArguments(musicBundle);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, musicFragment).addToBackStack(null).commit();
-                //loadFragment(musicFragment);
             }
         });
     }
@@ -118,18 +117,6 @@ public class PlaylistHolder extends RecyclerView.ViewHolder {
         });
     }
 
-//    public String putTitle(int i){
-//        String title;
-//        title = songList.get(i).getsong();
-//        return title;
-//    }
-//
-//    public String putReference(int i){
-//        String ref;
-//        ref = songList.get(i).getReference();
-//        return ref;
-//    }
-
     public String getTitle() {
         return title;
     }
@@ -149,12 +136,5 @@ public class PlaylistHolder extends RecyclerView.ViewHolder {
     public void setPlayList (List<PlaylistModel> playList){
         this.playList = playList;
     }
-
-//    private void loadFragment(Fragment fragment) {
-//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.frame_container, fragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
 
 }

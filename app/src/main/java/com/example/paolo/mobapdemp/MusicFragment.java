@@ -2,6 +2,7 @@ package com.example.paolo.mobapdemp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -28,6 +29,9 @@ public class MusicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_music, container, false);
+
+
+
         this.e = view.findViewById(R.id.musicSearch);
         Log.d("toFilter","Initializing edit text");
         return view;
@@ -38,6 +42,12 @@ public class MusicFragment extends Fragment {
         musicRecycler = view.findViewById(R.id.musicRecycler);
 
         manager = new LinearLayoutManager(view.getContext());
+
+        DividerItemDecoration dividerItemDecoration  = new DividerItemDecoration(musicRecycler.getContext(),((LinearLayoutManager) manager).VERTICAL);
+        musicRecycler.setHasFixedSize(true);
+        musicRecycler.setLayoutManager(manager);
+        musicRecycler.addItemDecoration(dividerItemDecoration);
+
         musicRecycler.setLayoutManager(manager);
 
         adapter = new MusicAdapter();

@@ -3,6 +3,7 @@ package com.example.paolo.mobapdemp;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,6 +32,12 @@ public class UserPlaylistFragment extends Fragment {
         UPRecycler = view.findViewById(R.id.userPlaylistRecycler);
 
         manager = new LinearLayoutManager(view.getContext());
+
+        DividerItemDecoration dividerItemDecoration  = new DividerItemDecoration(UPRecycler.getContext(),((LinearLayoutManager) manager).VERTICAL);
+        UPRecycler.setHasFixedSize(true);
+        UPRecycler.setLayoutManager(manager);
+        UPRecycler.addItemDecoration(dividerItemDecoration);
+
         UPRecycler.setLayoutManager(manager);
 
         adapter = new PlaylistAdapter();

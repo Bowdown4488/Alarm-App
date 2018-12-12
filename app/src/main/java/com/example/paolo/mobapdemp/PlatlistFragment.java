@@ -3,6 +3,7 @@ package com.example.paolo.mobapdemp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -51,6 +52,12 @@ public class PlatlistFragment extends Fragment{
         addRecycler = view.findViewById(R.id.addRecycler);
 
         manager = new LinearLayoutManager(view.getContext());
+
+        DividerItemDecoration dividerItemDecoration  = new DividerItemDecoration(addRecycler.getContext(),((LinearLayoutManager) manager).VERTICAL);
+        addRecycler.setHasFixedSize(true);
+        addRecycler.setLayoutManager(manager);
+        addRecycler.addItemDecoration(dividerItemDecoration);
+
         addRecycler.setLayoutManager(manager);
 
         adapter = new AddPlaylistAdapter();
