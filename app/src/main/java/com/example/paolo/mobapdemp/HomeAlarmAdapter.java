@@ -24,6 +24,8 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
     private Fragment parentFragment;
     private int counter = 0;
     private HomeAlarmHolder currentHolder;
+    private int size;
+    private ArrayList<String> referenceList;
 
     public HomeAlarmAdapter(Fragment fragment){
         homeAlarmList = new ArrayList<>();
@@ -65,6 +67,11 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
         @Override
         public void onClick(View v) {
             Intent alarmIntent = new Intent(HomeFragment.ALARM_UPDATE_TAG);
+
+            for(int i = 0;i<size;i++){
+                alarmIntent.putExtra("LIST"+i, HomeAlarmAdapter.this.referenceList.get(i));
+                Log.d("tester",HomeAlarmAdapter.this.referenceList.get(i));
+            }
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeAlarmAdapter.this.parentFragment.getActivity(),
                     0, alarmIntent, 0);
@@ -109,5 +116,13 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void setSize(int size){
+        this.size = size;
+    }
+
+    public void setReferenceList(ArrayList<String> list){
+        this.referenceList = list;
     }
 }

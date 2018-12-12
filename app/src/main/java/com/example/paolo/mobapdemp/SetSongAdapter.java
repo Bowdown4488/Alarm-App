@@ -50,11 +50,11 @@ public class SetSongAdapter extends RecyclerView.Adapter<SetSongHolder> {
 
         @Override
         public void onClick(View v) {
-            SetSongFragment fragment = new SetSongFragment();
-            Bundle homeBundle = new Bundle();
-            homeBundle.putString("TITLE", setSongList.get(counter).getsong());
+            AlarmSetFragment fragment = new AlarmSetFragment();
+            Bundle alarmSetBundle = new Bundle();
+            alarmSetBundle.putString("TITLE", setSongList.get(counter).getsong());
 
-            fragment.setArguments(homeBundle);
+            fragment.setArguments(alarmSetBundle);
             swapFragment(fragment, SetSongAdapter.this.parentFragment);
         }
     }

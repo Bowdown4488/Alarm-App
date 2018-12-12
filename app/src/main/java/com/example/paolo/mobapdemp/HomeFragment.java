@@ -73,15 +73,7 @@ public class HomeFragment extends Fragment {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlarmSetFragment fragment = new AlarmSetFragment();
-
-                Bundle savedArgs = getArguments();
-                for(int i = 0;i<songList.size();i++){
-                    savedArgs.putString("LIST"+i,songList.get(i).getReference());
-                }
-
-                fragment.setSongList(songList);
-                swapFragment(fragment);
+                adapter.addItem(0, 0, 0);
             }
         });
 
@@ -89,11 +81,14 @@ public class HomeFragment extends Fragment {
         if(savedArgs!=null){
             adapter.addItem(savedArgs.getInt("HOUR"), savedArgs.getInt("MINUTE"), savedArgs.getInt("DAY"));
             size = savedArgs.getInt("Size");
+            adapter.setSize(size);
+
             Log.d("tester","Rand: " + Integer.toString(size));
             for(int i = 0;i<size;i++){
                 reference.add(savedArgs.getString("LIST"+i));
                 Log.d("tester",reference.get(i));
             }
+            adapter.setReferenceList(reference);
         }
 
         IntentFilter filter = new IntentFilter();
