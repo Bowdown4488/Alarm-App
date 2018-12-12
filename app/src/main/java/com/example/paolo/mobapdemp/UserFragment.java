@@ -52,7 +52,10 @@ public class UserFragment extends Fragment {
         playList = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Playlist");
+
         loadPlaylist();
+
+
 
         Playlistbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +68,7 @@ public class UserFragment extends Fragment {
                     homeBundle.putString("CREATOR" + i, putOwner(i));
                     homeBundle.putInt("COUNT" + i, putCount(i));
                 }
+
                 homeBundle.putInt("Size", playList.size());
                 UPFragment.setPlayList(playList);
                 UPFragment.setSongList(songList);
@@ -133,6 +137,19 @@ public class UserFragment extends Fragment {
         return count;
     }
 
+    public String putTitl(int i) {
+        String owner;
+        owner = playList.get(i).getPlaylistTitle();
+        return owner;
+    }
+
+//    public ArrayList<PlaylistModel> putList(){
+//        List<String> test = new ArrayList<>();
+//        for(int i =0; i<playList.size();i++){
+//            test.add(playList.get(i).getSongID());
+//        }
+//    }
+
     public void setList(List<Song> list) {
         songList = list;
     }
@@ -155,6 +172,7 @@ public class UserFragment extends Fragment {
     }
 
     public void loadPlaylist() {
+        Log.d("Playlist","Start Loading from db");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -166,7 +184,6 @@ public class UserFragment extends Fragment {
                     PlaylistModel playlistModel = playListSnapshot.getValue(PlaylistModel.class);
                     playList.add(playlistModel);
                 }
-                Log.d("Playlist", Integer.toString(playList.size()));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

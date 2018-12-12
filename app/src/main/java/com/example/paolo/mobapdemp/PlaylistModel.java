@@ -1,5 +1,7 @@
 package com.example.paolo.mobapdemp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,11 @@ public class PlaylistModel {
         this.creator=creator;
         this.songID = songID;
         this.count = count;
+
+        for (String value : songID)
+        {
+            Log.d("model",value);
+        }
     }
 
     public PlaylistModel (String playlistTitle, String creator, int count){

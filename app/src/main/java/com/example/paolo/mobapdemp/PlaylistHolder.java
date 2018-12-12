@@ -47,12 +47,6 @@ public class PlaylistHolder extends RecyclerView.ViewHolder {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                databaseReference = FirebaseDatabase.getInstance().getReference("Song");
-//                firebaseAuth = FirebaseAuth.getInstance();
-//
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                email = user.getEmail();
-
                 //initSongs();
 
                 int k = 0;
@@ -60,24 +54,36 @@ public class PlaylistHolder extends RecyclerView.ViewHolder {
                 MusicFragment musicFragment = new MusicFragment();                       //put data to show here
                 Bundle musicBundle = new Bundle();
 
-                Log.d("Song","before init");
-
-                for(int i = 0;i < playList.size();i++){
-                    Log.d("Title","Title: " + title);
+                int i = 0, position = 0;
+                Boolean found = false;
+                while(i < playList.size() && found != true){
                     if(title.equals(playList.get(i).getPlaylistTitle())){
+                        Log.d("Title","Title: " + title);
                         Log.d("Title","playlist: " + playList.get(i).getPlaylistTitle());
-                        for(int j =0; j < playList.size();j++){
-                            Log.d("Title","playlist id: " + playList.get(j).getSongID()); //line of null pionter
-                            Log.d("Title","songlist id: " + songList.get(j).getartistId());
-                            if(playList.get(i).getSongID().get(j).equals(songList.get(j).getartistId())) {
-                                Log.d("Title","songlist: " + songList.get(j).getsong());
-                                musicBundle.putString("TITLE" + i, songList.get(i).getsong());
-                                musicBundle.putString("REF" + i, songList.get(i).getReference());
-                                k++;
-                            }
+                        position = i;
+                        found = true;
+                        Log.d("Title", Integer.toString(position));
+                    }
+                    i++;
+                }
+
+                Log.d("Title","Loading playlist: " + playList.get(position).getPlaylistTitle());
+
+                for(int j =0; j < playList.get(position).getCount();j++){
+                    Log.d("Title","Playlist id: " + playList.get(position).getSongID().get(j));
+                    Log.d("Title","Songlist id: " + songList.get(j).getartistId());
+                    for(int x = 0; x < songList.size();x++){
+                        if(playList.get(position).getSongID().get(j).equals(songList.get(x).getartistId())) {
+                            Log.d("Sing","Song name: " + songList.get(x).getsong());
+                            Log.d("Sing","Song reference: " + songList.get(x).getReference());
+                            musicBundle.putString("TITLE" + k, songList.get(x).getsong());
+                            musicBundle.putString("REF" + k, songList.get(x).getReference());
+                            k++;
                         }
                     }
                 }
+
+
                 musicBundle.putInt("SIZE",k);
 
                 musicFragment.setSongList(songList);

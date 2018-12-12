@@ -2,6 +2,7 @@ package com.example.paolo.mobapdemp;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
 
-    private ArrayList<PlaylistModel> PlaylistList;
+    private List<PlaylistModel> PlaylistList;
     List<Song> songList;
 
     public PlaylistAdapter(){
@@ -32,6 +33,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
 
     @Override
     public void onBindViewHolder(@NonNull PlaylistHolder PlaylistHolder, int i) {
+
         PlaylistHolder.setName(PlaylistList.get(i).getPlaylistTitle());
         PlaylistHolder.setCreator(PlaylistList.get(i).getCreator(),PlaylistList.get(i).getCount());
         PlaylistHolder.setTitle(PlaylistList.get(i).getPlaylistTitle());
@@ -52,6 +54,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
 
     public List<Song> setSongList (List<Song> songList){
         return this.songList = songList;
+    }
+
+    public void setPlayList (List<PlaylistModel> playList){
+        this.PlaylistList = playList;
     }
 
 }
