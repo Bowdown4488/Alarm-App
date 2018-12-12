@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class AlarmSetFragment extends Fragment {
     private Button set;
     private int hour;
     private int minute;
+    private int size;
+    private ArrayList<String> referenceList;
 
     private CheckBox sun;
     private CheckBox mon;
@@ -64,7 +67,8 @@ public class AlarmSetFragment extends Fragment {
         if(savedArgs!=null){
             this.hour = savedArgs.getInt("HOUR");
             this.minute = savedArgs.getInt("MINUTE");
-
+            this.size = savedArgs.getInt("Size");
+            this.referenceList = savedArgs.getStringArrayList("LIST");
         }
 
         tClock.setCurrentHour(hour);
@@ -104,6 +108,7 @@ public class AlarmSetFragment extends Fragment {
                 homeBundle.putInt("HOUR", hour);
                 homeBundle.putInt("MINUTE", min);                            //dummy data for time
                 homeBundle.putInt("DAY", 5);
+                homeBundle.putInt("Size", size);
                 homeFragment.setSongList(songList);
 
                 homeFragment.setArguments(homeBundle);

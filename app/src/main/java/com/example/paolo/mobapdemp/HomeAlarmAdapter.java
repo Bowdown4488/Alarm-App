@@ -67,7 +67,7 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
         @Override
         public void onClick(View v) {
             Intent alarmIntent = new Intent(HomeFragment.ALARM_UPDATE_TAG);
-
+            alarmIntent.putExtra("Size", size);
             for(int i = 0;i<size;i++){
                 alarmIntent.putExtra("LIST"+i, HomeAlarmAdapter.this.referenceList.get(i));
                 Log.d("tester",HomeAlarmAdapter.this.referenceList.get(i));
@@ -105,6 +105,8 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
             homeBundle.putInt("HOUR", homeAlarmList.get(counter).getAlarmHour());
             homeBundle.putInt("MINUTE", homeAlarmList.get(counter).getAlarmMinute());                            //dummy data for time
             homeBundle.putInt("DAY", 5);
+            homeBundle.putInt("Size", HomeAlarmAdapter.this.size);
+            homeBundle.putStringArrayList("LIST", HomeAlarmAdapter.this.referenceList);
 
             fragment.setArguments(homeBundle);
             swapFragment(fragment, HomeAlarmAdapter.this.parentFragment);
