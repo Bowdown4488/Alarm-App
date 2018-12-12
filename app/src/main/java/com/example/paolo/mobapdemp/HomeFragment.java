@@ -146,8 +146,8 @@ public class HomeFragment extends Fragment {
 
             mediaPlayer = new MediaPlayer();
             try{
-                //mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/ReeeeeeeZero.mp3?alt=media&token=bcab51be-eec5-4ec6-be07-ac42f3f853b8");
-                mediaPlayer.setDataSource(listSong.get(rand));
+                mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/woke-4a6eb.appspot.com/o/ReeeeeeeZero.mp3?alt=media&token=bcab51be-eec5-4ec6-be07-ac42f3f853b8");
+                //mediaPlayer.setDataSource(listSong.get(rand));
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
