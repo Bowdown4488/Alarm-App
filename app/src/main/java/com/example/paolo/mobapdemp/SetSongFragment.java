@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class SetSongFragment extends Fragment {
 
     private RecyclerView setSongRecycler;
     private SetSongAdapter adapter;
     private RecyclerView.LayoutManager manager;
 
+    List<Song> songList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,8 +37,14 @@ public class SetSongFragment extends Fragment {
 
         Bundle savedArgs = getArguments();                  //loads data passed from main activity
         if(savedArgs!=null){
-            adapter.addItem(savedArgs.getString("TITLE"));             //adds rows of alarms
-
+            for (int i = 0 ;i < songList.size();i++){
+                adapter.addItem(savedArgs.getString("TITLE"+i),savedArgs.getString("REF"+i));
+            }
         }
     }
+
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
+    }
+
 }

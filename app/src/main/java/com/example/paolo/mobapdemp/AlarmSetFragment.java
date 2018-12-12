@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class AlarmSetFragment extends Fragment {
@@ -32,6 +34,8 @@ public class AlarmSetFragment extends Fragment {
     private CheckBox thurs;
     private CheckBox fri;
     private CheckBox sat;
+
+    List<Song> songList;
 
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -100,6 +104,7 @@ public class AlarmSetFragment extends Fragment {
                 homeBundle.putInt("HOUR", hour);
                 homeBundle.putInt("MINUTE", min);                            //dummy data for time
                 homeBundle.putInt("DAY", 5);
+                homeFragment.setSongList(songList);
 
                 homeFragment.setArguments(homeBundle);
                 swapFragment(homeFragment);
@@ -110,8 +115,19 @@ public class AlarmSetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SetSongFragment setSongFragment = new SetSongFragment();                       //put data to show here
+
                 Bundle setSongBundle = new Bundle();
-                setSongBundle.putString("TITLE", "Catch the moment");                         //dummy data for select song list
+
+                Log.d("songlist", "Pass list");
+                int j = songList.size();
+                Log.d("songlist",Integer.toString(j));
+
+                for(int i = 0;i < songList.size();i++){
+                    setSongBundle.putString("TITLE" + i, songList.get(i).getsong());
+                    setSongBundle.putString("REF" + i, songList.get(i).getReference());
+                }
+
+                setSongFragment.setSongList(songList);
 
                 setSongFragment.setArguments(setSongBundle);
                 swapFragment(setSongFragment);
@@ -125,6 +141,10 @@ public class AlarmSetFragment extends Fragment {
 
     public void setMinute(int minute){
         this.minute = minute;
+    }
+
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
     }
 
     private void swapFragment(Fragment fragment){

@@ -13,13 +13,13 @@ import java.util.ArrayList;
 
 public class SetSongAdapter extends RecyclerView.Adapter<SetSongHolder> {
 
-    private ArrayList<SetSongModel> setSongList;
+    private ArrayList<Song> setSongList;
     private Fragment parentFragment;
     private int counter = 0;
 
     public SetSongAdapter(Fragment fragment){
         setSongList = new ArrayList<>();
-
+        this.parentFragment = fragment;
     }
 
     @NonNull
@@ -36,17 +36,14 @@ public class SetSongAdapter extends RecyclerView.Adapter<SetSongHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SetSongHolder setSongHolder, int i) {
-        setSongHolder.setTitleTxt(setSongList.get(i).getTitle());
+        setSongHolder.setTitleTxt(setSongList.get(i).getsong());
+        setSongHolder.setReference(setSongList.get(i).getReference());
+        this.counter = i;
     }
 
     @Override
     public int getItemCount() {
         return setSongList.size();
-    }
-
-    public void addItem(String title){
-        setSongList.add(new SetSongModel(title));
-        notifyItemInserted(setSongList.size()-1);
     }
 
     public class ItemViewListener implements View.OnClickListener{
@@ -55,7 +52,7 @@ public class SetSongAdapter extends RecyclerView.Adapter<SetSongHolder> {
         public void onClick(View v) {
             SetSongFragment fragment = new SetSongFragment();
             Bundle homeBundle = new Bundle();
-            homeBundle.putString("TITLE", setSongList.get(counter).getTitle());
+            homeBundle.putString("TITLE", setSongList.get(counter).getsong());
 
             fragment.setArguments(homeBundle);
             swapFragment(fragment, SetSongAdapter.this.parentFragment);
@@ -67,5 +64,10 @@ public class SetSongAdapter extends RecyclerView.Adapter<SetSongHolder> {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void addItem(String title, String ref) {
+        setSongList.add(new Song(title, ref));
+        notifyItemInserted(setSongList.size() - 1);
     }
 }

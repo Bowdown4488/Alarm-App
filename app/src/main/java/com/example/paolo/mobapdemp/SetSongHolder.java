@@ -11,6 +11,8 @@ public class SetSongHolder extends RecyclerView.ViewHolder{
 
     private TextView titleTxt;
     private Fragment parentFragment;
+    String reference;
+
 
     public SetSongHolder(@NonNull View itemView, final Fragment parentFragment) {
         super(itemView);
@@ -25,5 +27,9 @@ public class SetSongHolder extends RecyclerView.ViewHolder{
 
     public void addItemViewListener(View.OnClickListener listener){
         itemView.setOnClickListener(listener);
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 }

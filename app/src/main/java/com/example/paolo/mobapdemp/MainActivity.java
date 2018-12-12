@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putInt("HOUR", 4);
         bundle.putInt("MINUTE", 20);                            //dummy data for time
         bundle.putInt("DAY", 5);
+        fragment.setSongList(songList);
         fragment.setArguments(bundle);
         loadFragment(fragment);
 
@@ -79,6 +80,16 @@ public class MainActivity extends AppCompatActivity {
                         homeBundle.putInt("HOUR", 4);
                         homeBundle.putInt("MINUTE", 20);                            //dummy data for time
                         homeBundle.putInt("DAY", 5);
+                        homeBundle.putInt("Size",songList.size());
+
+                        for(int i = 0;i<songList.size();i++){
+                            homeBundle.putString("LIST"+i,songList.get(i).getReference());
+                        }
+
+                        Log.d("songlist", "Pass list");
+                        Log.d("songlist",Integer.toString(songList.size()) );
+                        Log.d("songlist", songList.get(0).getsong());
+                        homeFragment.setSongList(songList);
 
                         homeFragment.setArguments(homeBundle);
                         loadFragment(homeFragment);
