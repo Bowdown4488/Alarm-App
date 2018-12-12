@@ -66,6 +66,8 @@ public class UserFragment extends Fragment {
                     homeBundle.putInt("COUNT" + i, putCount(i));
                 }
                 homeBundle.putInt("Size", playList.size());
+                UPFragment.setPlayList(playList);
+                UPFragment.setSongList(songList);
 
                 UPFragment.setArguments(homeBundle);
                 loadFragment(UPFragment, UserFragment.this);
@@ -139,6 +141,7 @@ public class UserFragment extends Fragment {
         this.listStorage = listStorage;
     }
 
+
     public String putTitle(int i){
         String title;
         title = songList.get(i).getsong();
@@ -170,6 +173,5 @@ public class UserFragment extends Fragment {
 
             }
         });
-
     }
 }

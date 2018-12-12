@@ -1,5 +1,6 @@
 package com.example.paolo.mobapdemp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistModel {
@@ -13,7 +14,7 @@ public class PlaylistModel {
 
     }
 
-    public PlaylistModel(String playlistID,String playlistTitle,String creator,  List<String> songID, int count){
+    public PlaylistModel(String playlistID, String playlistTitle, String creator, List<String> songID, int count){
         this.playlistID=playlistID;
         this.playlistTitle = playlistTitle;
         this.creator=creator;
@@ -65,5 +66,10 @@ public class PlaylistModel {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String specificSongID(int i) {
+        String id = songID.get(i);
+        return  id;
     }
 }

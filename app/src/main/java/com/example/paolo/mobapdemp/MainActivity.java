@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         UserFragment userFragment = new UserFragment();                       //put data to show here
                         Bundle userBundle = new Bundle();
                         userBundle.putString("USERNAME", email);
-                        userFragment.setList(listStorage.getSongList());
+                        userFragment.setList(songList);
                         userFragment.setStorage(listStorage);
 //                        listStorage.lookSongs();
 

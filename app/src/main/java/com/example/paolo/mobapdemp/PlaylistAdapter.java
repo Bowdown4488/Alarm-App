@@ -7,15 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
 
     private ArrayList<PlaylistModel> PlaylistList;
+    List<Song> songList;
 
     public PlaylistAdapter(){
         PlaylistList = new ArrayList<>();
-
-
     }
 
     @NonNull
@@ -34,6 +34,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
     public void onBindViewHolder(@NonNull PlaylistHolder PlaylistHolder, int i) {
         PlaylistHolder.setName(PlaylistList.get(i).getPlaylistTitle());
         PlaylistHolder.setCreator(PlaylistList.get(i).getCreator(),PlaylistList.get(i).getCount());
+        PlaylistHolder.setTitle(PlaylistList.get(i).getPlaylistTitle());
+        PlaylistHolder.setPlayList(PlaylistList);
+        PlaylistHolder.setSongList(songList);
+
     }
 
     @Override
@@ -45,4 +49,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistHolder>  {
         PlaylistList.add(new PlaylistModel(name,creator,count));
         notifyItemInserted(PlaylistList.size()-1);
     }
+
+    public List<Song> setSongList (List<Song> songList){
+        return this.songList = songList;
+    }
+
 }

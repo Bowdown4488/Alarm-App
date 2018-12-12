@@ -10,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class UserPlaylistFragment extends Fragment {
 
     private RecyclerView UPRecycler;
     private PlaylistAdapter adapter;
     private RecyclerView.LayoutManager manager;
+    List<Song> songList;
+    List<PlaylistModel> playList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +41,16 @@ public class UserPlaylistFragment extends Fragment {
             for (int i = 0 ;i < savedArgs.getInt("Size");i++){
                 adapter.addItem(savedArgs.getString("NAME"+i), savedArgs.getString("CREATOR"+i),savedArgs.getInt("COUNT"+i));
             }
+            adapter.setSongList(songList);
         }
+    }
+
+    public void setSongList(List<Song> songList) {
+        this.songList = songList;
+    }
+
+    public void setPlayList (List<PlaylistModel> playList){
+        this.playList = playList;
     }
 
 }

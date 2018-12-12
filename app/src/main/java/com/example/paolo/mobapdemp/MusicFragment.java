@@ -54,8 +54,7 @@ public class MusicFragment extends Fragment {
 
         try{ //check where to put in the music fragment creation
             Log.d("in try","Filter edit text");
-            this.getE().addTextChangedListener(new TextWatcher() { //LINE OF NULL POINTER
-                @Override
+            this.getE().addTextChangedListener(new TextWatcher() {
 
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -76,7 +75,6 @@ public class MusicFragment extends Fragment {
         }catch(NullPointerException e){
             e.printStackTrace();
         }
-
     }
 
     public void filter (String text){
@@ -86,7 +84,6 @@ public class MusicFragment extends Fragment {
                 filter.add(song);
             }
         }
-
         Log.d("toFilter",text);
         adapter.filterList(filter);
     }
@@ -99,3 +96,5 @@ public class MusicFragment extends Fragment {
         return e;
     }
 }
+
+

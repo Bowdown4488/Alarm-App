@@ -122,18 +122,20 @@ public class PlatlistFragment extends Fragment{
     public void savePlaylist (){
         String title = playlistTitle.getText().toString().trim();
         addPlaylist = listStorage.getSongList();
-        List<String> songID = new ArrayList<String>();
+        List<String> songID = new ArrayList<>();
         int j = 0, size = addPlaylist.size();
 
         for(int i = 0;i < size;i++){
             if(addPlaylist.get(i).getChecked() == true){
+                String gotID = addPlaylist.get(i).getartistId();
+                Log.d("test",gotID);
                 songID.add(addPlaylist.get(i).getartistId());
                 j++;
-                Log.d("ID","Song: " + addPlaylist.get(i).getsong() + " ID:" + addPlaylist.get(i).getartistId());
             }
         }
         String id = databaseReference.push().getKey();
         PlaylistModel playlistModel = new PlaylistModel(id,title,email,songID,j);
+        Log.d("test",playlistModel.getSongID().get(0));
 
         databaseReference.child(id).setValue(playlistModel);
     }
