@@ -60,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         HomeFragment fragment = new HomeFragment();                                     //defaults to HomeFragment at the start
         Bundle bundle = new Bundle();
-        bundle.putString("TIME", "ded");
-        bundle.putString("DAY", "getsuyoubi");
+        bundle.putInt("HOUR", 4);
+        bundle.putInt("MINUTE", 20);                            //dummy data for time
+        bundle.putInt("DAY", 5);
         fragment.setArguments(bundle);
         loadFragment(fragment);
 
@@ -75,8 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
                         HomeFragment homeFragment = new HomeFragment();                       //put data to show here
                         Bundle homeBundle = new Bundle();
-                        homeBundle.putString("TIME", "ded");
-                        homeBundle.putString("DAY", "getsuyoubi");
+                        homeBundle.putInt("HOUR", 4);
+                        homeBundle.putInt("MINUTE", 20);                            //dummy data for time
+                        homeBundle.putInt("DAY", 5);
 
                         homeFragment.setArguments(homeBundle);
                         loadFragment(homeFragment);

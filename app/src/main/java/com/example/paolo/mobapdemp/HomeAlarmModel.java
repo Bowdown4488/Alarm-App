@@ -2,29 +2,39 @@ package com.example.paolo.mobapdemp;
 
 public class HomeAlarmModel {
 
-    private String time;
-    private String day;
+    private int hour;
+    private int minute;
+    private int day;
     private boolean active;
 
-    public HomeAlarmModel(String time, String day){
-        this.time = time;
+    public HomeAlarmModel(int hour, int minute, int day /*Song song*/){
+        this.hour = hour;
+        this.minute = minute;
         this.day = day;
         this.active = false;
     }
 
-    public String getAlarmTime(){
-        return this.time;
+    public int getAlarmHour(){
+        return this.hour;
     }
 
-    public void setAlarmTime(String alarmTime){
-        this.time = alarmTime;
+    public void setAlarmHour(int alarmHour){
+        this.hour = alarmHour;
     }
 
-    public String getAlarmDay(){
+    public int getAlarmMinute(){
+        return this.minute;
+    }
+
+    public void setAlarmMinute(int alarmMinute){
+        this.minute = alarmMinute;
+    }
+
+    public int getAlarmDay(){
         return this.day;
     }
 
-    public void setAlarmDay(String alarmDay){
+    public void setAlarmDay(int alarmDay){
         this.day = alarmDay;
     }
 

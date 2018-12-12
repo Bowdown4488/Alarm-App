@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,16 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.util.Calendar;
+
 
 public class AlarmSetFragment extends Fragment {
     private TimePicker tClock;
     private TextView tView;
     private Button set;
+    private int hour;
+    private int minute;
+
     private CheckBox sun;
     private CheckBox mon;
     private CheckBox tues;
@@ -25,6 +31,7 @@ public class AlarmSetFragment extends Fragment {
     private CheckBox thurs;
     private CheckBox fri;
     private CheckBox sat;
+
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.M)
 
@@ -39,7 +46,7 @@ public class AlarmSetFragment extends Fragment {
 
         tClock = v.findViewById(R.id.timePicker1);
         tView = v.findViewById(R.id.Ans);
-        set=v.findViewById(R.id.set);
+        set = v.findViewById(R.id.set);
         sun = v.findViewById(R.id.sun);
         mon = v.findViewById(R.id.mon);
         tues = v.findViewById(R.id.tues);
@@ -48,8 +55,15 @@ public class AlarmSetFragment extends Fragment {
         fri = v.findViewById(R.id.fri);
         sat = v.findViewById(R.id.sat);
 
-        tClock.setCurrentHour(8);
-        tClock.setCurrentMinute(45);
+        Bundle savedArgs = getArguments();                  //loads data passed from HomeFragment
+        if(savedArgs!=null){
+            this.hour = savedArgs.getInt("HOUR");
+            this.minute = savedArgs.getInt("MINUTE");
+
+        }
+
+        tClock.setCurrentHour(hour);
+        tClock.setCurrentMinute(minute);
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +94,31 @@ public class AlarmSetFragment extends Fragment {
                 if(!days.equals(""))
                     time=time+" "+days;
                 tView.setText(time);
+
+                HomeFragment homeFragment = new HomeFragment();                       //put data to show here
+                Bundle homeBundle = new Bundle();
+                homeBundle.putInt("HOUR", hour);
+                homeBundle.putInt("MINUTE", min);                            //dummy data for time
+                homeBundle.putInt("DAY", 5);
+
+                homeFragment.setArguments(homeBundle);
+                swapFragment(homeFragment);
             }
         });
+    }
+
+    public void setHour(int hour){
+        this.hour = hour;
+    }
+
+    public void setMinute(int minute){
+        this.minute = minute;
+    }
+
+    private void swapFragment(Fragment fragment){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
