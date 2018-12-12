@@ -20,6 +20,7 @@ import java.util.Calendar;
 public class AlarmSetFragment extends Fragment {
     private TimePicker tClock;
     private TextView tView;
+    private Button selectBtn;
     private Button set;
     private int hour;
     private int minute;
@@ -45,7 +46,7 @@ public class AlarmSetFragment extends Fragment {
     public void onViewCreated(View v,Bundle savedInstanceState){
 
         tClock = v.findViewById(R.id.timePicker1);
-        tView = v.findViewById(R.id.Ans);
+        selectBtn = v.findViewById(R.id.selectBtn);
         set = v.findViewById(R.id.set);
         sun = v.findViewById(R.id.sun);
         mon = v.findViewById(R.id.mon);
@@ -93,7 +94,6 @@ public class AlarmSetFragment extends Fragment {
                     days=days+"Sa";
                 if(!days.equals(""))
                     time=time+" "+days;
-                tView.setText(time);
 
                 HomeFragment homeFragment = new HomeFragment();                       //put data to show here
                 Bundle homeBundle = new Bundle();
@@ -103,6 +103,18 @@ public class AlarmSetFragment extends Fragment {
 
                 homeFragment.setArguments(homeBundle);
                 swapFragment(homeFragment);
+            }
+        });
+
+        selectBtn.setOnClickListener(new View.OnClickListener() {                               //select songs listener
+            @Override
+            public void onClick(View v) {
+                SetSongFragment setSongFragment = new SetSongFragment();                       //put data to show here
+                Bundle setSongBundle = new Bundle();
+                setSongBundle.putString("TITLE", "Catch the moment");                         //dummy data for select song list
+
+                setSongFragment.setArguments(setSongBundle);
+                swapFragment(setSongFragment);
             }
         });
     }

@@ -47,7 +47,7 @@ public class UserFragment extends Fragment {
         username = view.findViewById(R.id.userName);
 //        number = view.findViewById(R.id.contact_number);
         Playlistbtn = view.findViewById(R.id.viewPlaybtn);
-        Addlistbtn = view.findViewById(R.id.addPlaybtn);
+        Addlistbtn = view.findViewById(R.id.addPlayBtn);
 
         playList = new ArrayList<>();
 

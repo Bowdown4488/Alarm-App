@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -45,6 +46,11 @@ public class HomeFragment extends Fragment {
         manager = new LinearLayoutManager(view.getContext());
         homeRecycler.setLayoutManager(manager);
 
+        DividerItemDecoration dividerItemDecoration  = new DividerItemDecoration(homeRecycler.getContext(),((LinearLayoutManager) manager).VERTICAL);
+        homeRecycler.setHasFixedSize(true);
+        homeRecycler.setLayoutManager(manager);
+        homeRecycler.addItemDecoration(dividerItemDecoration);
+
         adapter = new HomeAlarmAdapter(HomeFragment.this);
         homeRecycler.setAdapter(adapter);
 
@@ -72,12 +78,12 @@ public class HomeFragment extends Fragment {
 
     }
 
-
     private void swapFragment(Fragment fragment){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
     public class ActivityReceiver extends BroadcastReceiver {

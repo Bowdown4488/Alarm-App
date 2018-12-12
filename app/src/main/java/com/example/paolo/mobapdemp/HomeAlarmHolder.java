@@ -18,7 +18,6 @@ import java.util.Calendar;
 
 public class HomeAlarmHolder extends RecyclerView.ViewHolder {
 
-    private MainActivity activity;
     private TextView timeTxt;
     private Switch alarmSwitch;
     private Fragment parentFragment;
@@ -30,14 +29,6 @@ public class HomeAlarmHolder extends RecyclerView.ViewHolder {
         alarmSwitch = itemView.findViewById(R.id.alarmSwitch);
         this.parentFragment = parentFragment;
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
     }
 
     public void setTimeTxt(String text){
@@ -48,22 +39,15 @@ public class HomeAlarmHolder extends RecyclerView.ViewHolder {
         alarmSwitch.setChecked(active);
     }
 
-    public void startAlarm(){
-        Intent alarmIntent = new Intent(HomeFragment.ALARM_UPDATE_TAG);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeAlarmHolder.this.parentFragment.getActivity(),
-                0, alarmIntent, 0);
-
-        AlarmManager manager = (AlarmManager)HomeAlarmHolder.this.parentFragment.getActivity().getSystemService(Context.ALARM_SERVICE);
-        manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1000, pendingIntent);
-        Log.d("ALARMERINO", "onClick: ALARM SET");
-    }
-
     public void addAlarmSwitchListener(View.OnClickListener listener){
         alarmSwitch.setOnClickListener(listener);
     }
 
     public void addItemViewListener(View.OnClickListener listener){
         itemView.setOnClickListener(listener);
+    }
+
+    public Switch getAlarmSwitch(){
+        return this.alarmSwitch;
     }
 }

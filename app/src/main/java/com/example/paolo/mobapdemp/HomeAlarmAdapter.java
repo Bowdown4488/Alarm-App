@@ -23,10 +23,11 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
     private ArrayList<HomeAlarmModel> homeAlarmList;
     private Fragment parentFragment;
     private int counter = 0;
+    private HomeAlarmHolder currentHolder;
+
     public HomeAlarmAdapter(Fragment fragment){
         homeAlarmList = new ArrayList<>();
         this.parentFragment = fragment;
-
 
     }
 
@@ -46,6 +47,7 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
     public void onBindViewHolder(@NonNull HomeAlarmHolder homeAlarmHolder, int i) {
         homeAlarmHolder.setTimeTxt(Integer.toString(homeAlarmList.get(i).getAlarmHour()) + ":" + Integer.toString(homeAlarmList.get(i).getAlarmMinute()));                //how the data gets loaded into the rows
         this.counter = i;
+        this.currentHolder = homeAlarmHolder;
     }
 
     @Override
@@ -62,7 +64,28 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
 
         @Override
         public void onClick(View v) {
-            startAlarm();
+            Intent alarmIntent = new Intent(HomeFragment.ALARM_UPDATE_TAG);
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeAlarmAdapter.this.parentFragment.getActivity(),
+                    0, alarmIntent, 0);
+
+            AlarmManager manager = (AlarmManager)HomeAlarmAdapter.this.parentFragment.getActivity().getSystemService(Context.ALARM_SERVICE);
+
+            if(HomeAlarmAdapter.this.currentHolder.getAlarmSwitch().isChecked() == false){
+                manager.cancel(pendingIntent);
+                Log.d("ALARMERINO", "onClick: ALARM CANCELED");
+
+            }else{
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, homeAlarmList.get(counter).getAlarmHour());
+                calendar.set(Calendar.MINUTE, homeAlarmList.get(counter).getAlarmMinute());
+
+                Log.d("ALARMERINO", Integer.toString(Calendar.HOUR_OF_DAY, homeAlarmList.get(counter).getAlarmHour()));
+                manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                Log.d("ALARMERINO", "onClick: ALARM SET");
+
+            }
         }
     }
 
@@ -79,22 +102,6 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
             fragment.setArguments(homeBundle);
             swapFragment(fragment, HomeAlarmAdapter.this.parentFragment);
         }
-    }
-
-    public void startAlarm(){
-        Intent alarmIntent = new Intent(HomeFragment.ALARM_UPDATE_TAG);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeAlarmAdapter.this.parentFragment.getActivity(),
-                0, alarmIntent, 0);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, homeAlarmList.get(counter).getAlarmHour());
-        calendar.set(Calendar.MINUTE, homeAlarmList.get(counter).getAlarmMinute());
-
-        AlarmManager manager = (AlarmManager)HomeAlarmAdapter.this.parentFragment.getActivity().getSystemService(Context.ALARM_SERVICE);
-        manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        Log.d("ALARMERINO", "onClick: ALARM SET");
     }
 
     private void swapFragment(Fragment fragment, Fragment parentFragment){
