@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("songlist", "Pass list");
                         Log.d("songlist",Integer.toString(songList.size()) );
                         Log.d("songlist", songList.get(0).getsong());
-                        homeFragment.setSongList(songList);
+                        //homeFragment.setSongList(songList);
 
                         homeFragment.setArguments(homeBundle);
                         loadFragment(homeFragment);

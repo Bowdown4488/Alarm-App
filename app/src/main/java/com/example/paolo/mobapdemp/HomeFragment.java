@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
             Log.d("tester","Rand: " + Integer.toString(size));
             for(int i = 0;i<size;i++){
                 reference.add(savedArgs.getString("LIST"+i));
-                Log.d("tester",reference.get(i));
+//                Log.d("tester",reference.get(i));
             }
             adapter.setReferenceList(reference);
         }

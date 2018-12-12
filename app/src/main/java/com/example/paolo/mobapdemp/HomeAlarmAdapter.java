@@ -70,7 +70,7 @@ public class HomeAlarmAdapter extends RecyclerView.Adapter<HomeAlarmHolder> {
             alarmIntent.putExtra("Size", size);
             for(int i = 0;i<size;i++){
                 alarmIntent.putExtra("LIST"+i, HomeAlarmAdapter.this.referenceList.get(i));
-                Log.d("tester",HomeAlarmAdapter.this.referenceList.get(i));
+//                Log.d("tester",HomeAlarmAdapter.this.referenceList.get(i));
             }
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(HomeAlarmAdapter.this.parentFragment.getActivity(),
